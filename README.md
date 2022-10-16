@@ -4,7 +4,7 @@ Node and TS scripts for Balcao content workflow - scheduled job podcast feeds, c
 
 ## Installation
 
-Use npm or yarn. Refer to [this tutorial](https://khalilstemmler.com/blogs/typescript/node-starter-project)
+Use npm or yarn.
 
 ```bash
 npm install
@@ -31,6 +31,10 @@ npm run start:prod
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## Reference
+1. [TypeScript Tutorial 01](https://www.digitalocean.com/community/tutorials/typescript-running-typescript-ts-node)
+2. [TypeScript Tutorial 02](https://khalilstemmler.com/blogs/typescript/node-starter-project/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -27,6 +27,13 @@ Clean build and run
 npm run start:prod
 ```
 
+## Data Models
+Generate models using [sequelize-auto](https://github.com/sequelize/sequelize-auto)
+```bash
+npm install sequelize-auto --include=dev
+npx sequelize-auto -o "./src/models" -d postgres -h localhost -u postgres -p 54322 -x postgres -e postgres -t channels podcasts podcasts_pages stories topics -l ts
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

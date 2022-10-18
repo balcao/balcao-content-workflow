@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface Story {
+export interface StoryRecord {
   id?: number;
   cid?: string;
   doc?: object;
@@ -13,9 +13,9 @@ export interface Story {
 export type storiesPk = "id";
 export type storiesId = stories[storiesPk];
 export type storiesOptionalAttributes = "cid" | "doc" | "indexed_at";
-export type storiesCreationAttributes = Optional<Story, storiesOptionalAttributes>;
+export type storiesCreationAttributes = Optional<StoryRecord, storiesOptionalAttributes>;
 
-export class stories extends Model<Story, storiesCreationAttributes> implements Story {
+export class stories extends Model<StoryRecord, storiesCreationAttributes> implements StoryRecord {
   id!: number;
   cid?: string;
   doc?: object;

@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface Channel {
+export interface ChannelRecord {
   id?: number;
   cid?: string;
   doc?: object;
@@ -11,9 +11,9 @@ export interface Channel {
 export type channelsPk = "id";
 export type channelsId = channels[channelsPk];
 export type channelsOptionalAttributes = "cid" | "doc" | "indexed_at";
-export type channelsCreationAttributes = Optional<Channel, channelsOptionalAttributes>;
+export type channelsCreationAttributes = Optional<ChannelRecord, channelsOptionalAttributes>;
 
-export class channels extends Model<Channel, channelsCreationAttributes> implements Channel {
+export class channels extends Model<ChannelRecord, channelsCreationAttributes> implements ChannelRecord {
   id!: number;
   cid?: string;
   doc?: object;

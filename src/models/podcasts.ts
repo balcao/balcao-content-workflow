@@ -1,27 +1,29 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface Podcast {
+export interface PodcastRecord {
   id?: number;
   cid?: string;
   doc?: object;
-  feed_url: string;
-  // created_at: Date;
+  feedUrl: string;
   indexed_at?: Date;
-  // updated_at: Date;
+  latest_at?: Date;
+  active: boolean;
 }
 
 export type podcastsPk = "id";
 export type podcastsId = podcasts[podcastsPk];
-export type podcastsOptionalAttributes = "cid" | "doc" | "indexed_at";
-export type podcastsCreationAttributes = Optional<Podcast, podcastsOptionalAttributes>;
+export type podcastsOptionalAttributes = "cid" | "doc" | "indexed_at" | "latest_at";
+export type podcastsCreationAttributes = Optional<PodcastRecord, podcastsOptionalAttributes>;
 
-export class podcasts extends Model<Podcast, podcastsCreationAttributes> implements Podcast {
+export class podcasts extends Model<PodcastRecord, podcastsCreationAttributes> implements PodcastRecord {
   id!: number;
   cid?: string;
   doc?: object;
-  feed_url!: string;
+  feedUrl!: string;
   indexed_at?: Date;
+  latest_at?: Date;
+  active!: boolean;
 
 
   static initModel(sequelize: Sequelize.Sequelize): typeof podcasts {
@@ -42,14 +44,23 @@ export class podcasts extends Model<Podcast, podcastsCreationAttributes> impleme
       type: DataTypes.JSONB,
       allowNull: true
     },
-    feed_url: {
+    feedUrl: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: "podcasts_feed_url_key"
+      unique: "podcasts_feed_url_key",
+      field: 'feed_url'
     },
     indexed_at: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    latest_at: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     },
   }, {
     sequelize,

@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface PodcastPage {
+export interface PodcastPageRecord {
   id?: number;
   cid?: string;
   doc?: object;
@@ -12,9 +12,9 @@ export interface PodcastPage {
 export type podcasts_pagesPk = "id";
 export type podcasts_pagesId = podcasts_pages[podcasts_pagesPk];
 export type podcasts_pagesOptionalAttributes = "cid" | "doc" | "indexed_at";
-export type podcasts_pagesCreationAttributes = Optional<PodcastPage, podcasts_pagesOptionalAttributes>;
+export type podcasts_pagesCreationAttributes = Optional<PodcastPageRecord, podcasts_pagesOptionalAttributes>;
 
-export class podcasts_pages extends Model<PodcastPage, podcasts_pagesCreationAttributes> implements PodcastPage {
+export class podcasts_pages extends Model<PodcastPageRecord, podcasts_pagesCreationAttributes> implements PodcastPageRecord {
   id!: number;
   cid?: string;
   doc?: object;

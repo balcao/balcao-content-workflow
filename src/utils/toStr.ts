@@ -1,0 +1,1 @@
+export const _str = (obj: any) => `${obj}`

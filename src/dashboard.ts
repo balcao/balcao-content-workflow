@@ -7,7 +7,7 @@ import { ExpressAdapter } from '@bull-board/express';
 
 dotenv.config();
 
-const SERVER_PORT = 3002;
+const SERVER_PORT = process.env.DASHBOARD_SERVER_PORT!
 
 const podcastsFeedsQueue = new Queue('PodcastsFeedsQueue', {
   connection: { port: +process.env.REDIS_PORT!, host: process.env.REDIS_HOST!, password: process.env.REDIS_PASSWORD! },

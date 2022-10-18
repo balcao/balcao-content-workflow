@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface Topic {
+export interface TopicRecord {
   id?: number;
   cid?: string;
   doc?: object;
@@ -11,9 +11,9 @@ export interface Topic {
 export type topicsPk = "id";
 export type topicsId = topics[topicsPk];
 export type topicsOptionalAttributes = "cid" | "doc" | "indexed_at";
-export type topicsCreationAttributes = Optional<Topic, topicsOptionalAttributes>;
+export type topicsCreationAttributes = Optional<TopicRecord, topicsOptionalAttributes>;
 
-export class topics extends Model<Topic, topicsCreationAttributes> implements Topic {
+export class topics extends Model<TopicRecord, topicsCreationAttributes> implements TopicRecord {
   id!: number;
   cid?: string;
   doc?: object;

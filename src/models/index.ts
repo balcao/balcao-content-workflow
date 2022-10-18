@@ -1,15 +1,15 @@
 import * as dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import { channels as _channels } from "./channels";
-import type { Channel, channelsCreationAttributes } from "./channels";
+import type { ChannelRecord, channelsCreationAttributes } from "./channels";
 import { podcasts as _podcasts } from "./podcasts";
-import type { Podcast, podcastsCreationAttributes } from "./podcasts";
+import type { PodcastRecord, podcastsCreationAttributes } from "./podcasts";
 import { podcasts_pages as _podcasts_pages } from "./podcasts_pages";
-import type { PodcastPage, podcasts_pagesCreationAttributes } from "./podcasts_pages";
+import type { PodcastPageRecord, podcasts_pagesCreationAttributes } from "./podcasts_pages";
 import { stories as _stories } from "./stories";
-import type { Story, storiesCreationAttributes } from "./stories";
+import type { StoryRecord, storiesCreationAttributes } from "./stories";
 import { topics as _topics } from "./topics";
-import type { Topic, topicsCreationAttributes } from "./topics";
+import type { TopicRecord, topicsCreationAttributes } from "./topics";
 
 dotenv.config();
 
@@ -24,15 +24,15 @@ const sequelize = new Sequelize(process.env.DB_CONNECTION_URL!);
 // };
 
 export type {
-  Channel as Channel,
+  ChannelRecord as Channel,
   // channelsCreationAttributes,
-  Podcast as podcastsAttributes,
+  PodcastRecord as podcastsAttributes,
   // podcastsCreationAttributes,
-  PodcastPage as podcasts_pagesAttributes,
+  PodcastPageRecord as podcasts_pagesAttributes,
   // podcasts_pagesCreationAttributes,
-  Story as storiesAttributes,
+  StoryRecord as storiesAttributes,
   // storiesCreationAttributes,
-  Topic as topicsAttributes,
+  TopicRecord as topicsAttributes,
   // topicsCreationAttributes,
 };
 

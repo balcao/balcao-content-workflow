@@ -1,18 +1,34 @@
 import * as dotenv from 'dotenv';
 import { Queue } from 'bullmq';
+import { getNewPodcasts, getPodcasts } from './podcasts';
+import { PodcastRecord } from '../models/podcasts';
 
-dotenv.config();
+dotenv.config()
+const queueName = process.env.PODCASTS_FEEDS_QUEUE!
 
-const SERVER_PORT = 3002;
-
-const podcastsFeedsQueue = new Queue('PodcastsFeedsQueue', {
+const podcastsFeedsQueue = new Queue(queueName, {
   connection: { port: +process.env.REDIS_PORT!, host: process.env.REDIS_HOST!, password: process.env.REDIS_PASSWORD! },
 })
 
-const addJob = async () => {
-    const result = await podcastsFeedsQueue.add('job01', { id: 1, description: 'Cool Job', params: { x: 1000, y: 'job1' } })
-    console.log('Job added: ', result)
+const addNewPodcastJobs = async () => {
+    const newPodcasts: PodcastRecord[] = await getNewPodcasts()
+    const result = await podcastsFeedsQueue.addBulk(newPodcasts.map(p => { return{ name: `NewPodcastJob[ID#${p.id}]`, data: { id: p.id, feed: p.feedUrl, isNew: true } }}))
+    console.log('NewPodcastJob jobs added: ', result.length)
 }
 
-addJob().finally(() => { podcastsFeedsQueue.disconnect() });
-console.log('Finish scheduling jobs')
+const addPodcastSyncJobs = async () => {
+    const podcasts: PodcastRecord[] = await getPodcasts()
+    const result = await podcastsFeedsQueue.addBulk(podcasts.map(p => { return{ name: `PodcastSyncJob[ID#${p.id}]`, data: { id: p.id, feed: p.feedUrl, isNew: false } }}))
+    console.log('PodcastSyncJob jobs added: ', result.length)
+}
+
+addNewPodcastJobs()
+.finally(() => {
+    addPodcastSyncJobs()
+    .finally(() => { 
+        podcastsFeedsQueue.disconnect()
+        .finally(() => {
+            console.log('Finished scheduling jobs')
+        })
+    })
+});

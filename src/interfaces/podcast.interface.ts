@@ -1,3 +1,4 @@
+import { Account } from "./account.interface"
 import { Category } from "./category.interface"
 import { Episode } from "./episode.interface"
 
@@ -14,11 +15,11 @@ export interface Podcast {
     author?: string
     summary?: string
     categories?: Category[]
-    owner?: any
+    owner?: Account
     explicit?: boolean
     complete?: boolean
     blocked?: boolean
-    episodes?: Episode[]
-    epCount?: number
-    feedUrl?: string
+    // episodes?: Episode[]
+    // epCount?: number
+    // feedUrl?: string
 }

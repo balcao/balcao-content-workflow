@@ -4,7 +4,7 @@ export interface Account {
     email?: string
     ens?: string
     bio?: string
-    isOrg: boolean
+    isOrg?: boolean
     twitter?: string
     website?: string
     href?: string

@@ -1,21 +1,21 @@
 import { Category } from "./category.interface"
+import { Enclosure } from "./enclosure.interface"
 import { Podcast } from "./podcast.interface"
 
 export interface Episode {
-    id: number
     title: string
     summary?: string
     description?: string
-    imgUrl?: string
+    imageURL?: string
     duration?: string
-    releaseDate?: Date
-    mediaUrl: string
-    mediaType?: string
-    mediaSize?: BigInt
-    rating?: string
-    podcast: Podcast
+    pubDate?: Date
+    enclosure: Enclosure
+    podcastCid?: string
     categories?: Category[]
-    slug?: string,
+    slug?: string
     link?: string
-
+    language?: string
+    order?: number
+    blocked?: boolean
+    explicit?: boolean
 }

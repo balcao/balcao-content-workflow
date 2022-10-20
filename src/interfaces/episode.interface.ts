@@ -8,7 +8,7 @@ export interface Episode {
     description?: string
     imageURL?: string
     duration?: string
-    pubDate?: Date
+    pubDate?: string
     enclosure: Enclosure
     podcastCid?: string
     categories?: Category[]

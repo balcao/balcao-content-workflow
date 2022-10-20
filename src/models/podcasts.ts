@@ -6,14 +6,14 @@ export interface PodcastRecord {
   cid?: string;
   doc?: object;
   feedUrl: string;
-  indexed_at?: Date;
-  latest_at?: Date;
+  indexedAt?: Date;
+  latestAt?: Date;
   active: boolean;
 }
 
 export type podcastsPk = "id";
 export type podcastsId = podcasts[podcastsPk];
-export type podcastsOptionalAttributes = "cid" | "doc" | "indexed_at" | "latest_at";
+export type podcastsOptionalAttributes = "cid" | "doc" | "indexedAt" | "latestAt";
 export type podcastsCreationAttributes = Optional<PodcastRecord, podcastsOptionalAttributes>;
 
 export class podcasts extends Model<PodcastRecord, podcastsCreationAttributes> implements PodcastRecord {
@@ -21,8 +21,8 @@ export class podcasts extends Model<PodcastRecord, podcastsCreationAttributes> i
   cid?: string;
   doc?: object;
   feedUrl!: string;
-  indexed_at?: Date;
-  latest_at?: Date;
+  indexedAt?: Date;
+  latestAt?: Date;
   active!: boolean;
 
 
@@ -50,13 +50,15 @@ export class podcasts extends Model<PodcastRecord, podcastsCreationAttributes> i
       unique: "podcasts_feed_url_key",
       field: 'feed_url'
     },
-    indexed_at: {
+    indexedAt: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      field: 'indexed_at'
     },
-    latest_at: {
+    latestAt: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      field: 'latest_at'
     },
     active: {
       type: DataTypes.BOOLEAN,

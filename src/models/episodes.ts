@@ -1,29 +1,29 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 
-export interface PodcastPageRecord {
+export interface EpisodeRecord {
   id?: number;
   cid?: string;
   doc?: object;
-  indexed_at?: Date;
-  podcast_cid: string;
+  indexedAt?: Date;
+  podcastCid: string;
 }
 
-export type podcasts_pagesPk = "id";
-export type podcasts_pagesId = podcasts_pages[podcasts_pagesPk];
-export type podcasts_pagesOptionalAttributes = "cid" | "doc" | "indexed_at";
-export type podcasts_pagesCreationAttributes = Optional<PodcastPageRecord, podcasts_pagesOptionalAttributes>;
+export type episodesPk = "id";
+export type episodesId = episodes[episodesPk];
+export type episodesOptionalAttributes = "cid" | "doc" | "indexedAt";
+export type episodesCreationAttributes = Optional<EpisodeRecord, episodesOptionalAttributes>;
 
-export class podcasts_pages extends Model<PodcastPageRecord, podcasts_pagesCreationAttributes> implements PodcastPageRecord {
+export class episodes extends Model<EpisodeRecord, episodesCreationAttributes> implements EpisodeRecord {
   id!: number;
   cid?: string;
   doc?: object;
-  indexed_at?: Date;
-  podcast_cid!: string;
+  indexedAt?: Date;
+  podcastCid!: string;
 
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof podcasts_pages {
-    return podcasts_pages.init({
+  static initModel(sequelize: Sequelize.Sequelize): typeof episodes {
+    return episodes.init({
     id: {
       autoIncrement: true,
       autoIncrementIdentity: true,
@@ -34,37 +34,39 @@ export class podcasts_pages extends Model<PodcastPageRecord, podcasts_pagesCreat
     cid: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: "podcasts_pages_cid_key"
+      unique: "episodes_cid_key"
     },
     doc: {
       type: DataTypes.JSONB,
       allowNull: true
     },
-    indexed_at: {
+    indexedAt: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      field: 'indexed_at'
     },
-    podcast_cid: {
+    podcastCid: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      field: 'podcast_cid'
     },
   }, {
     sequelize,
-    tableName: 'podcasts_pages',
+    tableName: 'episodes',
     schema: 'public',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     indexes: [
       {
-        name: "podcasts_pages_cid_key",
+        name: "episodes_cid_key",
         unique: true,
         fields: [
           { name: "cid" },
         ]
       },
       {
-        name: "podcasts_pages_pkey",
+        name: "episodes_pkey",
         unique: true,
         fields: [
           { name: "id" },

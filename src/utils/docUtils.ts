@@ -15,7 +15,7 @@ export const podcastToStorageRequest = (podcast: Podcast, cid = ''): StorageRequ
 
 export const episodeToStorageRequest = (episode: Episode, owner: Account, cid = ''): StorageRequest => {
     return {
-        docName: episode.slug!,
+        docName: `${episode.slug}-${episode.pubDate}`,
         doc: episode,
         docType: 'episode',
         author: owner,

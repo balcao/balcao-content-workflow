@@ -30,7 +30,7 @@ console.log('Finished fetching all podcasts')
 export const getNewPodcasts = async () => {
     const newPodcasts = await PodcastModel.findAll({
         where: {
-            latest_at: {
+            latestAt: {
                 [Op.is]: undefined
             }
         }
@@ -42,7 +42,7 @@ export const getNewPodcasts = async () => {
 export const getPodcasts = async () => {
     const podcasts = await PodcastModel.findAll({
         where: {
-            latest_at: {
+            latestAt: {
                 [Op.not]: undefined
             }
         }

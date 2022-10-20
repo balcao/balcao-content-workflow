@@ -1,9 +1,12 @@
-import S3 from 'aws-sdk/clients/s3';
+import AWS from 'aws-sdk';
 import { Account } from '../../interfaces/account.interface';
 import { Episode } from '../../interfaces/episode.interface';
 import { Podcast } from '../../interfaces/podcast.interface';
 import { StorageRequest } from '../../interfaces/storage.request.interface';
 import { _str } from '../../utils/toStr';
+import * as dotenv from 'dotenv';
+
+dotenv.config()
 
 const accessKeyId = process.env.FILEBASE_ACCESS_KEY_ID!
 const secretAccessKey = process.env.FILEBASE_SECRET_ACCESS_KEY!
@@ -11,15 +14,13 @@ const fbEndpoint = process.env.FILEBASE_ENDPOINT!
 const fbRegion = process.env.FILEBASE_REGION!
 const fbSignatureVersion = process.env.FILEBASE_SIGNATURE_VERSION!
 const fbBucket = process.env.FILEBASE_BUCKET!
-
-const s3 = new S3({
+console.log(accessKeyId, secretAccessKey, fbEndpoint, fbRegion, fbSignatureVersion, fbBucket)
+const s3 = new AWS.S3({
     endpoint: fbEndpoint,
-    region: fbRegion,
+    region: 'us-east-1',
     signatureVersion: fbSignatureVersion,
-    credentials: {
-      accessKeyId: accessKeyId,
-      secretAccessKey: secretAccessKey,
-    },
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey
   })
 
 export const addDocToIpfs = async(stRequest: StorageRequest) => {
@@ -29,9 +30,10 @@ export const addDocToIpfs = async(stRequest: StorageRequest) => {
         Bucket: fbBucket,
         Key: docName,
         Body: JSON.stringify(doc),
-        Metadata: { slug: _str(doc.slug), type: _str(docType),
-            title: _str(doc.title), author: _str(author?.address) }
+        Metadata: { slug: _str(doc.slug), type: _str(docType) }
     }
+
+    console.log('params: ', params)
 
     const request = s3.putObject(params)
     let newCid = ''
@@ -45,3 +47,5 @@ export const addDocToIpfs = async(stRequest: StorageRequest) => {
         isDuplicate: isDuplicate  
     }
 }
+
+// addDocToIpfs({ docName: 'doc-001', doc: { title: 'pod001'}, docType: 'podcast' }).then(_ => console.log(_))

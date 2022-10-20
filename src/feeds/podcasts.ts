@@ -39,14 +39,10 @@ export const getNewPodcasts = async () => {
     return newPodcasts;
 }
 
-export const getPodcasts = async () => {
-    const podcasts = await PodcastModel.findAll({
-        where: {
-            latestAt: {
-                [Op.not]: undefined
-            }
-        }
-    })
+export const getAllPodcasts = async () => {
+    const podcasts = await PodcastModel.findAll()
+
+    console.debug(`Found ${podcasts.length} podcasts`)
 
     return podcasts;
 }

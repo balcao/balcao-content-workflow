@@ -14,7 +14,7 @@ const fbEndpoint = process.env.FILEBASE_ENDPOINT!
 const fbRegion = process.env.FILEBASE_REGION!
 const fbSignatureVersion = process.env.FILEBASE_SIGNATURE_VERSION!
 const fbBucket = process.env.FILEBASE_BUCKET!
-console.log(accessKeyId, secretAccessKey, fbEndpoint, fbRegion, fbSignatureVersion, fbBucket)
+// console.log(accessKeyId, secretAccessKey, fbEndpoint, fbRegion, fbSignatureVersion, fbBucket)
 const s3 = new AWS.S3({
     endpoint: fbEndpoint,
     region: 'us-east-1',

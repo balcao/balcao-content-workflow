@@ -7,11 +7,12 @@ export interface EpisodeRecord {
   doc?: object;
   indexedAt?: Date;
   podcastCid: string;
+  pubDate?: Date;
 }
 
 export type episodesPk = "id";
 export type episodesId = episodes[episodesPk];
-export type episodesOptionalAttributes = "cid" | "doc" | "indexedAt";
+export type episodesOptionalAttributes = "cid" | "doc" | "indexedAt" | "pubDate";
 export type episodesCreationAttributes = Optional<EpisodeRecord, episodesOptionalAttributes>;
 
 export class episodes extends Model<EpisodeRecord, episodesCreationAttributes> implements EpisodeRecord {
@@ -20,6 +21,7 @@ export class episodes extends Model<EpisodeRecord, episodesCreationAttributes> i
   doc?: object;
   indexedAt?: Date;
   podcastCid!: string;
+  pubDate?: Date;
 
 
   static initModel(sequelize: Sequelize.Sequelize): typeof episodes {
@@ -50,6 +52,11 @@ export class episodes extends Model<EpisodeRecord, episodesCreationAttributes> i
       allowNull: false,
       field: 'podcast_cid'
     },
+    pubDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: 'pub_date'
+    }
   }, {
     sequelize,
     tableName: 'episodes',

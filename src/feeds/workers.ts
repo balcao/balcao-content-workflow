@@ -54,7 +54,7 @@ const processFeed = async (job: Job) => {
             // create episode document
             episode.slug = slugify(episode.title)
             const episodeDoc = await addDocToIpfs(episodeToStorageRequest(episode, podcast.owner!))
-            episodeRecords.push({ cid: episodeDoc.cid, doc: episode, podcastCid: podcastDoc.cid })
+            episodeRecords.push({ cid: episodeDoc.cid, doc: episode, podcastCid: podcastDoc.cid, pubDate: pubDate })
         } else {
             break
         }
